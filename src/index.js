@@ -25,27 +25,27 @@ _adapters._date.override(typeof moment === 'function' ? {
 
   parse: function(value, format) {
     if (typeof value === 'string' && typeof format === 'string') {
-      value = moment(value, format);
+      value = moment.utc(value, format);
     } else if (!(value instanceof moment)) {
-      value = moment(value);
+      value = moment.utc(value);
     }
     return value.isValid() ? value.valueOf() : null;
   },
 
   format: function(time, format) {
-    return moment(time).format(format);
+    return moment.utc(time).format(format);
   },
 
   add: function(time, amount, unit) {
-    return moment(time).add(amount, unit).valueOf();
+    return moment.utc(time).add(amount, unit).valueOf();
   },
 
   diff: function(max, min, unit) {
-    return moment(max).diff(moment(min), unit);
+    return moment.utc(max).diff(moment.utc(min), unit);
   },
 
   startOf: function(time, unit, weekday) {
-    time = moment(time);
+    time = moment.utc(time);
     if (unit === 'isoWeek') {
       weekday = Math.trunc(Math.min(Math.max(0, weekday), 6));
       return time.isoWeekday(weekday).startOf('day').valueOf();
@@ -54,6 +54,6 @@ _adapters._date.override(typeof moment === 'function' ? {
   },
 
   endOf: function(time, unit) {
-    return moment(time).endOf(unit).valueOf();
+    return moment.utc(time).endOf(unit).valueOf();
   }
 } : {});

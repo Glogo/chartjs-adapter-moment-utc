@@ -16,11 +16,11 @@ describe('Moment Adapter', function() {
     const adapter = new _adapters._date();
 
     const dayOfWeekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const daysInMonth = moment().daysInMonth();
+    const daysInMonth = moment.utc().daysInMonth();
 
     for (const dayOfWeek of dayOfWeekNames) {
       for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-        const dt = moment({day: dayOfMonth, hour: 8, minute: 30});
+        const dt = moment.utc({day: dayOfMonth, hour: 8, minute: 30});
         const startOf = adapter.startOf(dt.valueOf(), 'isoWeek', dayOfWeekNames.indexOf(dayOfWeek));
         expect(adapter.format(startOf, 'ddd')).toEqual(dayOfWeek);
         expect(startOf.day).not.toBeGreaterThan(dt.day);
@@ -28,28 +28,28 @@ describe('Moment Adapter', function() {
     }
 
     for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-      const dt = moment({day: dayOfMonth, hour: 8, minute: 30});
+      const dt = moment.utc({day: dayOfMonth, hour: 8, minute: 30});
       const startOf = adapter.startOf(dt.valueOf(), 'isoWeek', false);
       expect(adapter.format(startOf, 'ddd')).toEqual('Sun');
       expect(startOf.day).not.toBeGreaterThan(dt.day);
     }
 
     for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-      const dt = moment({day: dayOfMonth, hour: 8, minute: 30});
+      const dt = moment.utc({day: dayOfMonth, hour: 8, minute: 30});
       const startOf = adapter.startOf(dt.valueOf(), 'isoWeek', true);
       expect(adapter.format(startOf, 'ddd')).toEqual('Mon');
       expect(startOf.day).not.toBeGreaterThan(dt.day);
     }
 
     for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-      const dt = moment({day: dayOfMonth, hour: 8, minute: 30});
+      const dt = moment.utc({day: dayOfMonth, hour: 8, minute: 30});
       const startOf = adapter.startOf(dt.valueOf(), 'isoWeek', 100);
       expect(adapter.format(startOf, 'ddd')).toEqual('Sat');
       expect(startOf.day).not.toBeGreaterThan(dt.day);
     }
 
     for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-      const dt = moment({day: dayOfMonth, hour: 8, minute: 30});
+      const dt = moment.utc({day: dayOfMonth, hour: 8, minute: 30});
       const startOf = adapter.startOf(dt.valueOf(), 'isoWeek', -100);
       expect(adapter.format(startOf, 'ddd')).toEqual('Sun');
       expect(startOf.day).not.toBeGreaterThan(dt.day);
